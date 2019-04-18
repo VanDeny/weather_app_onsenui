@@ -1,3 +1,13 @@
+
+var Location = {
+    name : String,
+    latitude : String,
+    longitude : String,
+    temperature : String,
+    feelTemp : String,
+    icon : String
+}
+
 /*
 function getNow(lattitude, longtitude)
 {
@@ -16,14 +26,6 @@ function getNow(lattitude, longtitude)
 }
 */
 
-var Location = {
-    name : String,
-    latitude : String,
-    longitude : String,
-    temperature : String,
-    feelTemp : String,
-    icon : String
-}
 
 
 function getLatLong(location)
@@ -33,7 +35,7 @@ function getLatLong(location)
         if (status === google.maps.GeocoderStatus.OK) {
             //TODO Add to the Location and Check if is already there
         } else {
-            alert("Something got wrong " + status);
+            alert("Something got wrong with google api" + status);
         }
     });
 }
@@ -43,3 +45,7 @@ function addCity()
 {
     document.getElementById('addCityDialog').show();
 }
+
+function hideAlertDialog(){
+    document.getElementById('my-alert-dialog').hide();
+};
