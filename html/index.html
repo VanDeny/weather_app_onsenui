@@ -6,15 +6,30 @@
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
     <script src="../js/javascript.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5QtVetrDWZ89XJCV-kz40cC3bCwEKNro" async defer></script>
 </head>
 <body>
 
 </body>
+
+
 <ons-toolbar>
-    <div class="center">Floating action button</div>
+    <div class="center" style="background-color: #0AAAFF" >Totally badass weather podcast</div>
 </ons-toolbar>
 
+
+
 <ons-fab position="bottom right">
-    <ons-icon icon="md-plus"></ons-icon>
+    <ons-icon icon="md-plus" onclick="addCity()"></ons-icon>
 </ons-fab>
+
+
+
+<ons-dialog id="addCityDialog">
+    <label class="left">Enter City</label>
+    <ons-input id="name" modifier="underbar" placeholder="Ostrava" float></ons-input>
+    <ons-button modifier="quiet" onclick="getLatLong($('#name').val())">Save</ons-button>
+</ons-dialog>
+
+
 </html>
