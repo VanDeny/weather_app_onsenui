@@ -17,7 +17,7 @@ function getWeatherNow(lattitude, longtitude)
     $.ajax({
         url:$("#url").val(),
         type: "GET",
-        data:{"currently": $("#currently").val()},
+        data:{"currently": $("#currently")},
         success:function(data)
         {
             alert("Success " + data);
