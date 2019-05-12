@@ -6,40 +6,38 @@
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
     <script src="../js/javascript.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5QtVetrDWZ89XJCV-kz40cC3bCwEKNro" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5QtVetrDWZ89XJCV-kz40cC3bCwEKNro" async
+            defer></script>
 </head>
 <body>
 
 </body>
 
+<ons-sliding-menu  main-page="main.html" menu-page="menu.html" max-slide-distance="200px" type="reveal" side="left"></ons-sliding-menu>
 
-<ons-toolbar>
-    <div class="center" style="background-color: #0AAAFF" >Totally badass weather podcast</div>
-</ons-toolbar>
+<ons-template id="main.html">
+    <ons-page>
+        <ons-fab position="bottom right">
+            <ons-icon icon="md-plus" onclick="addCity()"></ons-icon>
+        </ons-fab>
+    </ons-page>
 
+</ons-template>
 
-
-<ons-fab position="bottom right">
-    <ons-icon icon="md-plus" onclick="addCity()"></ons-icon>
-</ons-fab>
-
+<ons-template id="menu.html">
+    <ons-list>
+        <ons-list-item modifier="chevron" onclick="menu.setMainPage('main.html', {closeMenu: true})">
+        </ons-list-item>
+    </ons-list>
+</ons-template>
 
 
 <ons-dialog id="addCityDialog">
-    <label class="left">Enter City</label>
+    <p>Enter City</p>
     <ons-input id="name" modifier="underbar" placeholder="Ostrava" float></ons-input>
     <ons-button modifier="quiet" onclick="getLatLong($('#name').val())">Save</ons-button>
+    <ons-button onclick="hideDialog('addCityDialog')">EXIT</ons-button>
 </ons-dialog>
 
-<ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
-    <div class="alert-dialog-title">Alert</div>
-    <div class="alert-dialog-content">
-        Somethin went wrong...
-    </div>
-    <div class="alert-dialog-footer">
-        <ons-alert-dialog-button onclick="reload()">Cancel</ons-alert-dialog-button>
-        <ons-alert-dialog-button onclick="hideAlertDialog()">OK</ons-alert-dialog-button>
-    </div>
-</ons-alert-dialog>
 
 </html>

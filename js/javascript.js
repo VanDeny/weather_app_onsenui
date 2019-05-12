@@ -20,6 +20,14 @@ class Location {
         return this.name;
     }
 
+    getToUpload() {
+        var ret = [];
+        ret.push(this.name);
+        ret.push(this.latitude);
+        ret.push(this.longtitude);
+        return ret;
+    }
+
     set(temp, icon, desc) {
         this.temperature = temp;
         this.icon = icon;
@@ -31,6 +39,9 @@ class Location {
 var listOfLocations = [];
 var API_key = '01c20d8b605d742011860dc9f8512ff7';
 
+function uploadToLocal() {
+
+}
 
 function getLatLong(location) {
     var geocoder = new google.maps.Geocoder();
@@ -77,6 +88,6 @@ function addCity() {
     document.getElementById('addCityDialog').show();
 }
 
-function hideAlertDialog() {
-    document.getElementById('my-alert-dialog').hide();
+var hideDialog = function(id) {
+    document.getElementById(id).hide();
 };
