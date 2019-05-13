@@ -6,38 +6,110 @@
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
     <script src="../js/javascript.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5QtVetrDWZ89XJCV-kz40cC3bCwEKNro" async
-            defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5QtVetrDWZ89XJCV-kz40cC3bCwEKNro" async defer></script>
 </head>
 <body>
 
 </body>
 
-<ons-sliding-menu  main-page="main.html" menu-page="menu.html" max-slide-distance="200px" type="reveal" side="left"></ons-sliding-menu>
 
-<ons-template id="main.html">
+<ons-splitter>
+    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+        <ons-page>
+            <ons-list>
+                <ons-list-item onclick="fn.load('home.html')" tappable>
+                    Main
+                </ons-list-item>
+                <ons-list-item onclick="fn.load('list.html')" tappable>
+                    List of Cities
+                </ons-list-item>
+                <ons-list-item onclick="fn.load('about.html')" tappable>
+                    About
+                </ons-list-item>
+            </ons-list>
+        </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+</ons-splitter>
+
+<template id="home.html">
     <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                    <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center">
+                Main
+            </div>
+        </ons-toolbar>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+            Swipe right to open the menu!
+        </p>
         <ons-fab position="bottom right">
             <ons-icon icon="md-plus" onclick="addCity()"></ons-icon>
         </ons-fab>
     </ons-page>
+</template>
 
-</ons-template>
+<template id="list.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                    <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center">
+                Settings
+            </div>
+        </ons-toolbar>
+        <ons-list id="listOfCities">
+        </ons-list>
+    </ons-page>
+</template>
 
-<ons-template id="menu.html">
-    <ons-list>
-        <ons-list-item modifier="chevron" onclick="menu.setMainPage('main.html', {closeMenu: true})">
-        </ons-list-item>
-    </ons-list>
-</ons-template>
+<template id="description.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                    <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center">
+
+            </div>
+        </ons-toolbar>
+    </ons-page>
+</template>
+
+
+
+
 
 
 <ons-dialog id="addCityDialog">
-    <p>Enter City</p>
-    <ons-input id="name" modifier="underbar" placeholder="Ostrava" float></ons-input>
-    <ons-button modifier="quiet" onclick="getLatLong($('#name').val())">Save</ons-button>
-    <ons-button onclick="hideDialog('addCityDialog')">EXIT</ons-button>
+    <div className='alert-dialog-title' style="text-align: center">Enter City</div>
+    <div className='alert-dialog-title' style="text-align: center">
+        <ons-input id="name" modifier="underbar" placeholder="Ostrava" float></ons-input>
+    </div>
+    <div className='alert-dialog-title'>
+        <ons-button modifier="quiet" onclick="hideDialog('addCityDialog')">Exit</ons-button>
+        <ons-button modifier="quiet" onclick="getLatLong($('#name').val())">Save</ons-button>
+    </div>
 </ons-dialog>
 
+<ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+    <div class="alert-dialog-title">Alert</div>
+    <div class="alert-dialog-content">
+        Somethin went wrong...
+    </div>
+    <div class="alert-dialog-footer">
+        <ons-alert-dialog-button onclick="reload()">Cancel</ons-alert-dialog-button>
+        <ons-alert-dialog-button onclick="hideAlertDialog()">OK</ons-alert-dialog-button>
+    </div>
+</ons-alert-dialog>
 
 </html>
