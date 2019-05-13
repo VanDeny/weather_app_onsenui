@@ -13,22 +13,92 @@
 </body>
 
 
-<ons-toolbar>
-    <div class="center" style="background-color: #0AAAFF" >Totally badass weather podcast</div>
-</ons-toolbar>
+<ons-splitter>
+    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+        <ons-page>
+            <ons-list>
+                <ons-list-item onclick="fn.load('home.html')" tappable>
+                    Main
+                </ons-list-item>
+                <ons-list-item onclick="fn.load('list.html')" tappable>
+                    List of Cities
+                </ons-list-item>
+                <ons-list-item onclick="fn.load('about.html')" tappable>
+                    About
+                </ons-list-item>
+            </ons-list>
+        </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+</ons-splitter>
+
+<template id="home.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                    <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center">
+                Main
+            </div>
+        </ons-toolbar>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+            Swipe right to open the menu!
+        </p>
+        <ons-fab position="bottom right">
+            <ons-icon icon="md-plus" onclick="addCity()"></ons-icon>
+        </ons-fab>
+    </ons-page>
+</template>
+
+<template id="list.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                    <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center">
+                Settings
+            </div>
+        </ons-toolbar>
+        <ons-list id="listOfCities">
+        </ons-list>
+    </ons-page>
+</template>
+
+<template id="description.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="fn.open()">
+                    <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center">
+
+            </div>
+        </ons-toolbar>
+    </ons-page>
+</template>
 
 
 
-<ons-fab position="bottom right">
-    <ons-icon icon="md-plus" onclick="addCity()"></ons-icon>
-</ons-fab>
 
 
 
 <ons-dialog id="addCityDialog">
-    <label class="left">Enter City</label>
-    <ons-input id="name" modifier="underbar" placeholder="Ostrava" float></ons-input>
-    <ons-button modifier="quiet" onclick="getLatLong($('#name').val())">Save</ons-button>
+    <div className='alert-dialog-title' style="text-align: center">Enter City</div>
+    <div className='alert-dialog-title' style="text-align: center">
+        <ons-input id="name" modifier="underbar" placeholder="Ostrava" float></ons-input>
+    </div>
+    <div className='alert-dialog-title'>
+        <ons-button modifier="quiet" onclick="hideDialog('addCityDialog')">Exit</ons-button>
+        <ons-button modifier="quiet" onclick="getLatLong($('#name').val())">Save</ons-button>
+    </div>
 </ons-dialog>
 
 <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
