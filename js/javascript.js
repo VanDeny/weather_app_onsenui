@@ -86,15 +86,15 @@ function getWeather(latitude, longtitude) {
 
 function getWeatherForecast(latitude, longtitude) {
 
-        urls = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longtitude + '&appid=' + API_key + '&units=metric';
-        fetch(urls)
-            .then(response => {
-                console.log("success");
-                return response.json();
-            })
-            .then(data => {
-                renderForecast(data);
-            })
+    urls = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longtitude + '&appid=' + API_key + '&units=metric';
+    fetch(urls)
+        .then(response => {
+            console.log("success");
+            return response.json();
+        })
+        .then(data => {
+            renderForecast(data);
+        })
 }
 
 
