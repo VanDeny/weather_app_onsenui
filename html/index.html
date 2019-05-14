@@ -1,93 +1,68 @@
 <html>
 <head>
+    <title>Počasí</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5QtVetrDWZ89XJCV-kz40cC3bCwEKNro"></script>
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
-    <script src="../js/javascript.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5QtVetrDWZ89XJCV-kz40cC3bCwEKNro" async defer></script>
+    <script src="../js/javascript.js" type="text/javascript"></script>
 </head>
-<body>
+<body onload="start()">
+<ons-page>
+    <ons-toolbar style="background-color: #64B5F6">
+        <div class="left">
+            <ons-toolbar-button modifier="quiet" style="color:white" onclick="deleteItems()">Vymazat vše</ons-toolbar-button>
+        </div>
+        <div class="center"><font style="color:white"><b>Totally badass weather app</b></font></div>
 
+        <div class="right">
+            <ons-toolbar-button style="color:white" icon="ion-refresh" onclick="start()"></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-tabbar swipeable position="auto">
+        <ons-tab page="tab1.html" label="Předpověď počasí" icon="md-sun" active>
+        </ons-tab>
+        <ons-tab page="tab2.html" label="Uložené lokace" icon="md-storage">
+        </ons-tab>
+    </ons-tabbar>
+</ons-page>
 </body>
 
 
-<ons-splitter>
-    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
-        <ons-page>
-            <ons-list>
-                <ons-list-item onclick="fn.load('home.html')" tappable>
-                    Main
-                </ons-list-item>
-                <ons-list-item onclick="fn.load('list.html')" tappable>
-                    List of Cities
-                </ons-list-item>
-                <ons-list-item onclick="fn.load('about.html')" tappable>
-                    About
-                </ons-list-item>
-            </ons-list>
-        </ons-page>
-    </ons-splitter-side>
-    <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
-</ons-splitter>
+<template id="tab1.html">
+    <ons-page id="Tab1" style="text-align: center" >
 
-<template id="home.html">
-    <ons-page>
-        <ons-toolbar>
-            <div class="left">
-                <ons-toolbar-button onclick="fn.open()">
-                    <ons-icon icon="md-menu"></ons-icon>
-                </ons-toolbar-button>
-            </div>
-            <div class="center">
-                Main
-            </div>
-        </ons-toolbar>
-        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-            Swipe right to open the menu!
-        </p>
-        <ons-fab position="bottom right">
-            <ons-icon icon="md-plus" onclick="addCity()"></ons-icon>
+        <h2 id="mesto" ></h2>
+        <p id="stav" ></p>
+        <div id="div-obrazek" ><img  id="obrazek"></div>
+        <h1 id="teplota"></h1>
+        <ons-row style="text-align: center; padding-top: 40px">
+            <ons-col id="den1"></ons-col>
+            <ons-col id="den2"></ons-col>
+            <ons-col id="den3"></ons-col>
+            <ons-col id="den4"></ons-col>
+            <ons-col id="den5"></ons-col>
+        </ons-row>
+
+
+    </ons-page>
+</template>
+
+<template id="tab2.html">
+    <ons-page id="Tab2">
+        <ons-gesture-detector>
+            <ons-list id="listLoc">
+
+            </ons-list>
+        </ons-gesture-detector>
+        <ons-fab position="bottom right" onclick="showPrompt()">
+            <ons-icon icon="md-plus"></ons-icon>
         </ons-fab>
     </ons-page>
 </template>
-
-<template id="list.html">
-    <ons-page>
-        <ons-toolbar>
-            <div class="left">
-                <ons-toolbar-button onclick="fn.open()">
-                    <ons-icon icon="md-menu"></ons-icon>
-                </ons-toolbar-button>
-            </div>
-            <div class="center">
-                Settings
-            </div>
-        </ons-toolbar>
-        <ons-list id="listOfCities">
-        </ons-list>
-    </ons-page>
-</template>
-
-<template id="description.html">
-    <ons-page>
-        <ons-toolbar>
-            <div class="left">
-                <ons-toolbar-button onclick="fn.open()">
-                    <ons-icon icon="md-menu"></ons-icon>
-                </ons-toolbar-button>
-            </div>
-            <div class="center">
-
-            </div>
-        </ons-toolbar>
-    </ons-page>
-</template>
-
-
-
-
 
 
 <ons-dialog id="addCityDialog">
@@ -101,15 +76,5 @@
     </div>
 </ons-dialog>
 
-<ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
-    <div class="alert-dialog-title">Alert</div>
-    <div class="alert-dialog-content">
-        Somethin went wrong...
-    </div>
-    <div class="alert-dialog-footer">
-        <ons-alert-dialog-button onclick="reload()">Cancel</ons-alert-dialog-button>
-        <ons-alert-dialog-button onclick="hideAlertDialog()">OK</ons-alert-dialog-button>
-    </div>
-</ons-alert-dialog>
 
 </html>
