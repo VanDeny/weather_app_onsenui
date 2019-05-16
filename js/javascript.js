@@ -73,7 +73,7 @@ function getLatLong(location) {
 
 function getWeather(latitude, longtitude) {
 
-    var urls = ' ' + latitude + '&lon=' + longtitude + '&appid=' + API_key + '&units=metric';
+    var urls = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longtitude + '&appid=' + API_key + '&units=metric';
     fetch(urls)
         .then(response => {
             console.log("success");
@@ -129,8 +129,10 @@ function renderNow(data) {
     document.getElementById("mesto").innerHTML = data.name.toUpperCase();
     document.getElementById("stav").innerHTML = data.weather[0].description.toUpperCase();
     document.getElementById("teplota").innerHTML = Math.round(data.main.temp)+" °C";
-    if(data.weather[0].icon == "Clear")
-        document.getElementById("obrazek").setAttribute("src","http://openweathermap.org/img/w/sun.png");
+    if(data.weather[0].main == "Clear")
+        document.getElementById("obrazek").setAttribute("src","https://img.icons8.com/material/24/000000/sun.png");
+    else if(data.weather[0].main == "Mist")
+        document.getElementById("obrazek").setAttribute("src", "https://img.icons8.com/material/24/000000/dust.png");
     else
         document.getElementById("obrazek").setAttribute("src","https://img.icons8.com/material/24/000000/"+ data.weather[0].main +".png");
 }
@@ -188,8 +190,10 @@ function showList() {
         divicon.setAttribute('class','left');
         var img = document.createElement('img');
         {
-            if (datavalue.weather[0].icon == "Clear")
-                img.setAttribute("src", "http://openweathermap.org/img/w/sun.png");
+            if (datavalue.weather[0].main == "Clear")
+                img.setAttribute("src", "https://img.icons8.com/material/24/000000/sun.png");
+            else if(datavalue.weather[0].main =="Mist")
+                img.setAttribute("src", "https://img.icons8.com/material/24/000000/dust.png");
             else
                 img.setAttribute('src', 'https://img.icons8.com/material/24/000000/' + datavalue.weather[0].main + '.png');
         }
@@ -213,7 +217,7 @@ function showList() {
             showList();
         });
 
-        document.getElementById('listLoc').appendChild(onsItem);
+        document.getElementById("listLoc").appendChild(onsItem);
         console.log("added");
     }
 }
